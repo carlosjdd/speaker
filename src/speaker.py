@@ -45,6 +45,8 @@ class speaker_class():
 
     def speaking(self):
         command = 'espeak --stdout -v' + self.language + '+' + self.voice + ' -p' + self.pitch + ' -s' + self.speed + ' -k' + ' "' + self.texto_tts + '" | aplay'
+        print (command)
+        os.system(command)
 
     def run_loop(self):
         """ Infinite loop.
