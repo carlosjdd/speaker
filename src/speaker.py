@@ -2,6 +2,7 @@
 
 # import the necessary packages
 import rospy
+import os
 
 from custom_msgs.msg import String_Int
 
