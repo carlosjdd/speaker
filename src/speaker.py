@@ -73,7 +73,7 @@ if __name__=='__main__':
     """
     rospy.init_node('speaker_node')       # Init ROS node
 
-    speaker_tts = people_around()
+    speaker_tts = speaker_class()
     #rospy.on_shutdown(speaker_tts.stoping_node)
 
     speaker_tts.run_loop()
