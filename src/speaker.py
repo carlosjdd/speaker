@@ -45,7 +45,7 @@ class speaker_class():
         self.capitals = '20'
 
     def speaking(self):
-        command = 'espeak --stdout -v' + self.language + '+' + self.voice + ' -p' + self.pitch + ' -s' + self.speed + ' -k' + ' "' + self.texto_tts + '" | aplay'
+        command = 'espeak --stdout -v' + self.language + '+' + self.voice + ' -p' + self.pitch + ' -s' + self.speed + ' -k' + self.capitals + ' "' + self.texto_tts + '" | aplay'
         print (command)
         os.system(command)
 
