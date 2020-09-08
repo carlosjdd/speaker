@@ -51,7 +51,7 @@ class brain():
         self.open_data()
         self.decission_maker([0,0,0],["Hola a todos","Carlos","Luis"])
         self.decission_maker([1,0,0],["Hola a todos","Carlos","Luis"])
-        self.decission_maker([1,12,0],["Hola a todos","Carlos","Luis"])
+        self.decission_maker([1,1,0],["Hola a todos","Carlos","Luis"])
 
     def open_data(self):
 
