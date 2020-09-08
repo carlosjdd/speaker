@@ -132,9 +132,9 @@ class brain():
             elif text[0] != '':
                 if len(text) == 1:
                     if type[1] <= 0 or type[1] > len(self.phrases[type[0]+1]):
-                        self.tts_msg.data_string = self.phrases[type[0]+1][random.randint(0,len(self.phrases[type[0]+1])-1)] + text[0]
+                        self.tts_msg.data_string = self.phrases[type[0]+1][random.randint(0,len(self.phrases[type[0]+1])-1)] + text[0] + ', '
                     else:
-                        self.tts_msg.data_string = self.phrases[type[0]+1][type[1]-1] + text[0]
+                        self.tts_msg.data_string = self.phrases[type[0]+1][type[1]-1] + text[0] + ', '
                 else:
                     if type[1] <= 0 or type[1] > len(self.phrases[type[0]+2]):
                         self.tts_msg.data_string = self.phrases[type[0]+2][random.randint(0,len(self.phrases[type[0]+2])-1)]
@@ -155,9 +155,10 @@ class brain():
                     self.tts_msg.data_string = self.tts_msg.data_string + self.phrases[type[0]+3][type[1]-1]
             elif type[2] > 1:
                 if type[1] <= 0 or type[1] > len(self.phrases[type[0]+4]):
-                    self.tts_msg.data_string = self.tts_msg.data_string + self.phrases[type[0]+4][random.randint(0,len(self.phrases[type[0]+4])-1)]
+                    num_random = random.randint(0,len(self.phrases[type[0]+4])-1)
+                    self.tts_msg.data_string = self.tts_msg.data_string + self.phrases[type[0]+4][num_random] + str(type[2]) + self.phrases[type[0]+5][num_random]
                 else:
-                    self.tts_msg.data_string = self.tts_msg.data_string + self.phrases[type[0]+4][type[1]-1]
+                    self.tts_msg.data_string = self.tts_msg.data_string + self.phrases[type[0]+4][type[1]-1] + str(type[2]) + self.phrases[type[0]+5][type[1]-1]
 
 
 
