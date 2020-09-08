@@ -33,7 +33,7 @@ class brain():
         self.tts_msg = String_Int()
         self.tts_msg.data_int = 0
         self.tts_msg.data_string = ' '
-        self.tts_pub.publish(self.tts_msg)
+#        self.tts_pub.publish(self.tts_msg)
 #        self.info_pub.publish(self.peoples_info)
 
         #Set phrases Paths
@@ -66,7 +66,7 @@ class brain():
 #        self.decission_maker([3,0,0],[""])
 #        self.decission_maker([3,0,2],[""])
 #        self.decission_maker([3,0,1],["Carlos"])
-        self.decission_maker([3,0,4],["Carlos","Javier"])
+#        self.decission_maker([3,0,4],["Carlos","Javier"])
 
 
     def open_data(self):
@@ -165,8 +165,6 @@ class brain():
 
         print (self.tts_msg.data_string)
         self.tts_pub.publish(self.tts_msg)
-#        self.info_pub.publish(self.peoples_info)
-
 
     def run_loop(self):
         """ Infinite loop.
@@ -188,7 +186,9 @@ class brain():
         print (data.data_int)
         print("strings: ")
         print(data.data_string)
-        self.decission_maker(data.data_int, data.data_string)
+        #self.decission_maker(data.data_int, data.data_string)
+        self.decission_maker([3,0,4],["Carlos","Javier"])
+
 
 if __name__=='__main__':
     """ Main void.
