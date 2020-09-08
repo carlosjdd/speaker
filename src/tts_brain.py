@@ -98,8 +98,6 @@ class brain():
 
     def decission_maker(self, type, text):
 
-        print(type[2])
-
         # In case type is 0, it is send to speak the exactly same text that has been received
         if type[0] == 0:
             self.tts_msg.data_string = text[0]
@@ -143,7 +141,6 @@ class brain():
                 else:                                                                                                                                               #Otherwise, it is said the phrase indicated in the type[1]
                     self.tts_msg.data_string = self.tts_msg.data_string + self.phrases[type[0]+3][type[1]-1]
             elif type[2] > 1:
-                print(type[2])
                 if type[1] <= 0 or type[1] > len(self.phrases[type[0]+4]):                                                                                          # If the type[1] is 0, or a wrong number, a random phrase is said.
                     num_random = random.randint(0,len(self.phrases[type[0]+4])-1)
                     self.tts_msg.data_string = self.tts_msg.data_string + self.phrases[type[0]+4][num_random] + str(type[2]) + self.phrases[type[0]+5][num_random]
