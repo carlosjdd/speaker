@@ -50,21 +50,21 @@ class brain():
 
         self.open_data()
 
-        self.decission_maker([0,1,0],["Hello World"])
-        self.decission_maker([1,1,0],["Hello World"])
-        self.decission_maker([2,1,0],["Hello World"])
-        self.decission_maker([3,1,0],[""])
-        self.decission_maker([3,1,2],[""])
-        self.decission_maker([3,1,1],["Carlos"])
-        self.decission_maker([3,1,0],["Carlos","Javier"])
+#        self.decission_maker([0,1,0],["Hello World"])
+#        self.decission_maker([1,1,0],["Hello World"])
+#        self.decission_maker([2,1,0],["Hello World"])
+#        self.decission_maker([3,1,0],[""])
+#        self.decission_maker([3,1,2],[""])
+#        self.decission_maker([3,1,1],["Carlos"])
+#        self.decission_maker([3,1,0],["Carlos","Javier"])
 
-        self.decission_maker([0,0,0],["Hello World"])
-        self.decission_maker([1,0,0],["Hello World"])
-        self.decission_maker([2,0,0],["Hello World"])
-        self.decission_maker([3,0,0],[""])
-        self.decission_maker([3,0,2],[""])
-        self.decission_maker([3,0,1],["Carlos"])
-        self.decission_maker([3,0,0],["Carlos","Javier"])
+#        self.decission_maker([0,0,0],["Hello World"])
+#        self.decission_maker([1,0,0],["Hello World"])
+#        self.decission_maker([2,0,0],["Hello World"])
+#        self.decission_maker([3,0,0],[""])
+#        self.decission_maker([3,0,2],[""])
+#        self.decission_maker([3,0,1],["Carlos"])
+        self.decission_maker([3,0,4],["Carlos","Javier"])
 
 
     def open_data(self):
@@ -161,8 +161,8 @@ class brain():
                     self.tts_msg.data_string = self.tts_msg.data_string + self.phrases[type[0]+4][type[1]-1] + str(type[2]) + self.phrases[type[0]+5][type[1]-1]
 
 
-
         print (self.tts_msg.data_string)
+        self.tts_pub.publish(self.tts_msg)
 
 
     def run_loop(self):
