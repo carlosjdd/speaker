@@ -33,8 +33,6 @@ class brain():
         self.tts_msg = String_Int()
         self.tts_msg.data_int = 0
         self.tts_msg.data_string = ' '
-#        self.tts_pub.publish(self.tts_msg)
-#        self.info_pub.publish(self.peoples_info)
 
         #Set phrases Paths
         rospack = rospkg.RosPack()
@@ -51,22 +49,6 @@ class brain():
         print("[INFO] Ready to receive info")
 
         self.open_data()
-
-#        self.decission_maker([0,1,0],["Hello World"])
-#        self.decission_maker([1,1,0],["Hello World"])
-#        self.decission_maker([2,1,0],["Hello World"])
-#        self.decission_maker([3,1,0],[""])
-#        self.decission_maker([3,1,2],[""])
-#        self.decission_maker([3,1,1],["Carlos"])
-#        self.decission_maker([3,1,0],["Carlos","Javier"])
-
-#        self.decission_maker([0,0,0],["Hello World"])
-#        self.decission_maker([1,0,0],["Hello World"])
-#        self.decission_maker([2,0,0],["Hello World"])
-#        self.decission_maker([3,0,0],[""])
-#        self.decission_maker([3,0,2],[""])
-#        self.decission_maker([3,0,1],["Carlos"])
-#        self.decission_maker([3,0,4],["Carlos","Javier"])
 
 
     def open_data(self):
@@ -116,50 +98,53 @@ class brain():
 
     def decission_maker(self, type, text):
 
+        # In case type is 0, it is send to speak the exactly same text that has been received
         if type[0] == 0:
             self.tts_msg.data_string = text[0]
 
+        # In case type is 1 or 2, it is send to speak a phrase from the self.phrase[0] and self.phrase[1] respectively
         elif type[0] == 1 or type[0] == 2:
-            if type[1] <= 0 or type[1] > len(self.phrases[type[0]-1]):
+            if type[1] <= 0 or type[1] > len(self.phrases[type[0]-1]):                                                                                          # If the type[1] is 0, or a wrong number, a random phrase is said.
                 self.tts_msg.data_string = self.phrases[type[0]-1][random.randint(0,len(self.phrases[type[0]-1])-1)]
-            else:
+            else:                                                                                                                                               #Otherwise, it is said the phrase indicated in the type[1]
                 self.tts_msg.data_string = self.phrases[type[0]-1][type[1]-1]
 
+        # In case type is 3, it is necessary to know if there is noone in front of the camera. If there is noone known, if there is someone known and if there is also someone unknown
         elif type[0] == 3:
             if text[0] == '' and type[2] <= 0:
-                if type[1] <= 0 or type[1] > len(self.phrases[type[0]-1]):
+                if type[1] <= 0 or type[1] > len(self.phrases[type[0]-1]):                                                                                       # If the type[1] is 0, or a wrong number, a random phrase is said.
                     self.tts_msg.data_string = self.phrases[type[0]-1][random.randint(0,len(self.phrases[type[0]-1])-1)]
-                else:
+                else:                                                                                                                                             #Otherwise, it is said the phrase indicated in the type[1]
                     self.tts_msg.data_string = self.phrases[type[0]-1][type[1]-1]
             elif text[0] != '':
                 if len(text) == 1:
-                    if type[1] <= 0 or type[1] > len(self.phrases[type[0]+1]):
+                    if type[1] <= 0 or type[1] > len(self.phrases[type[0]+1]):                                                                                    # If the type[1] is 0, or a wrong number, a random phrase is said.
                         self.tts_msg.data_string = self.phrases[type[0]+1][random.randint(0,len(self.phrases[type[0]+1])-1)] + text[0] + ', '
-                    else:
+                    else:                                                                                                                                         #Otherwise, it is said the phrase indicated in the type[1]
                         self.tts_msg.data_string = self.phrases[type[0]+1][type[1]-1] + text[0] + ', '
                 else:
-                    if type[1] <= 0 or type[1] > len(self.phrases[type[0]+2]):
+                    if type[1] <= 0 or type[1] > len(self.phrases[type[0]+2]):                                                                                    # If the type[1] is 0, or a wrong number, a random phrase is said.
                         self.tts_msg.data_string = self.phrases[type[0]+2][random.randint(0,len(self.phrases[type[0]+2])-1)]
-                    else:
+                    else:                                                                                                                                         #Otherwise, it is said the phrase indicated in the type[1]
                         self.tts_msg.data_string = self.phrases[type[0]+2][type[1]-1]
                     for i in text:
                         self.tts_msg.data_string = self.tts_msg.data_string + i + ', '
             else:
-                if type[1] <= 0 or type[1] > len(self.phrases[type[0]]):
+                if type[1] <= 0 or type[1] > len(self.phrases[type[0]]):                                                                                          # If the type[1] is 0, or a wrong number, a random phrase is said.
                     self.tts_msg.data_string = self.phrases[type[0]][random.randint(0,len(self.phrases[type[0]])-1)]
-                else:
+                else:                                                                                                                                             #Otherwise, it is said the phrase indicated in the type[1]
                     self.tts_msg.data_string = self.phrases[type[0]][type[1]-1]
 
             if type[2] == 1:
-                if type[1] <= 0 or type[1] > len(self.phrases[type[0]+3]):
+                if type[1] <= 0 or type[1] > len(self.phrases[type[0]+3]):                                                                                          # If the type[1] is 0, or a wrong number, a random phrase is said.
                     self.tts_msg.data_string = self.tts_msg.data_string + self.phrases[type[0]+3][random.randint(0,len(self.phrases[type[0]+3])-1)]
-                else:
+                else:                                                                                                                                               #Otherwise, it is said the phrase indicated in the type[1]
                     self.tts_msg.data_string = self.tts_msg.data_string + self.phrases[type[0]+3][type[1]-1]
             elif type[2] > 1:
-                if type[1] <= 0 or type[1] > len(self.phrases[type[0]+4]):
+                if type[1] <= 0 or type[1] > len(self.phrases[type[0]+4]):                                                                                          # If the type[1] is 0, or a wrong number, a random phrase is said.
                     num_random = random.randint(0,len(self.phrases[type[0]+4])-1)
                     self.tts_msg.data_string = self.tts_msg.data_string + self.phrases[type[0]+4][num_random] + str(type[2]) + self.phrases[type[0]+5][num_random]
-                else:
+                else:                                                                                                                                               #Otherwise, it is said the phrase indicated in the type[1]
                     self.tts_msg.data_string = self.tts_msg.data_string + self.phrases[type[0]+4][type[1]-1] + str(type[2]) + self.phrases[type[0]+5][type[1]-1]
 
 
@@ -186,8 +171,8 @@ class brain():
         print (data.data_int)
         print("strings: ")
         print(data.data_string)
-        #self.decission_maker(data.data_int, data.data_string)
-        self.decission_maker([3,0,4],["Carlos","Javier"])
+        self.decission_maker(data.data_int, data.data_string)
+
 
 
 if __name__=='__main__':
