@@ -54,8 +54,15 @@ class speaker_class():
 
         It does nothing but wait until msgs are received.
         """
-        while True:
+        while not rospy.is_shutdown():
             pass
+
+    def stoping_node(self):
+        """ROS closing node
+
+        Is the function called when ROS node is closed.
+        This function closes all windows opened by opencv"""
+        print("\n\nBye bye! :)\n\n")
 
     def cb_tts(self, data):
         print("Tipo: ")
@@ -74,9 +81,13 @@ if __name__=='__main__':
     - Run the node
 
     """
-    rospy.init_node('speaker_node')       # Init ROS node
+    try:
+        rospy.init_node('speaker_node')       # Init ROS node
 
-    speaker_tts = speaker_class()
-    #rospy.on_shutdown(speaker_tts.stoping_node)
+        speaker_tts = speaker_class()
+        rospy.on_shutdown(speaker_tts.stoping_node)
 
-    speaker_tts.run_loop()
+        speaker_tts.run_loop()
+
+    except rospy.ROSInterruptException:
+        pass
