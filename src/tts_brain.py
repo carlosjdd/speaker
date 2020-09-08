@@ -65,7 +65,7 @@ class brain():
 
         with open(self.path_noone) as csvfile:
             csv_reader = csv.reader(csvfile, delimiter=";")	            # Read the csv file
-            self.phrases.append()
+            self.phrases.append('')
             for row in csv_reader:								        # Go through every row in the csv file
                 self.phrases[2].append(row[0])					            # Save the path of every SVG file into the array
 
