@@ -8,6 +8,7 @@ from custom_msgs.msg import String_Int_Arrays
 from custom_msgs.msg import String_Int
 
 import csv
+import random
 
 class brain():
     """ Class brain.
@@ -100,8 +101,13 @@ class brain():
     def decission_maker(self, type, text):
         if type[0] == 0:
             self.tts_msg.data_string = text[0]
-        elif type[0] == 1:
-            pass
+        elif type[0] == 1 or type[0] == 2:
+            if type[1] <= 0 or type[1] > len(self.phrases[type[0]-1]):
+                self.tts_msg.data_string = self.phrases[type[0]-1][random.randint(0,len(self.phrases[type[0]-1]))]
+            else:
+                self.tts_msg.data_string = self.phrases[type[0]-1][type[1]-1]
+
+        print (self.tts_msg.data_string)
 
 
     def run_loop(self):
