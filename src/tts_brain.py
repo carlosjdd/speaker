@@ -49,6 +49,9 @@ class brain():
         print("[INFO] Ready to receive info")
 
         self.open_data()
+        self.decission_maker([0,0,0],["Hola a todos","Carlos","Luis"])
+        self.decission_maker([1,0,0],["Hola a todos","Carlos","Luis"])
+        self.decission_maker([2,5,0],["Hola a todos","Carlos","Luis"])
 
     def open_data(self):
 
