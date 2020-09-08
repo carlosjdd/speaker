@@ -51,12 +51,12 @@ class brain():
 
     def open_data(self):
 
-        self.phrases = [][]
+        self.phrases = []
 
         with open(self.path_greetings) as csvfile:
 			csv_reader = csv.DictReader(csvfile, delimiter=";")	# Read the csv file
 			for row in csv_reader:								# Go through every row in the csv file
-                self.phrases[0].append(row["phrase"])					# Save the path of every SVG file into the array dom.
+                self.phrases.append(row["phrase"])					# Save the path of every SVG file into the array dom.
 
         print(self.phrases)
 
