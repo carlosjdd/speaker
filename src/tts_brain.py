@@ -68,32 +68,6 @@ class brain():
             self.phrases.append()
             for row in csv_reader:								        # Go through every row in the csv file
                 self.phrases[2].append(row[0])					            # Save the path of every SVG file into the array
-"""
-        with open(self.path_only_unknown) as csvfile:
-            csv_reader = csv.reader(csvfile, delimiter=";")	            # Read the csv file
-            for row in csv_reader:								        # Go through every row in the csv file
-                self.phrases[3].append(row[0])					            # Save the path of every SVG file into the array
-
-        with open(self.path_one_known) as csvfile:
-            csv_reader = csv.reader(csvfile, delimiter=";")	            # Read the csv file
-            for row in csv_reader:								        # Go through every row in the csv file
-                self.phrases[4].append(row[0])					            # Save the path of every SVG file into the array
-
-        with open(self.path_many_known) as csvfile:
-            csv_reader = csv.reader(csvfile, delimiter=";")	            # Read the csv file
-            for row in csv_reader:								        # Go through every row in the csv file
-                self.phrases[5].append(row[0])					            # Save the path of every SVG file into the array
-
-        with open(self.path_one_unknown) as csvfile:
-            csv_reader = csv.reader(csvfile, delimiter=";")	            # Read the csv file
-            for row in csv_reader:								        # Go through every row in the csv file
-                self.phrases[6].append(row[0])					            # Save the path of every SVG file into the array
-
-        with open(self.path_many_unknown) as csvfile:
-            csv_reader = csv.reader(csvfile, delimiter=";")	            # Read the csv file
-            for row in csv_reader:								        # Go through every row in the csv file
-                self.phrases[7].append(row[0])					            # Save the path of every SVG file into the array
-                self.phrases[8].append(row[1])"""
 
         print(self.phrases)
         print(len(self.phrases[0]))
