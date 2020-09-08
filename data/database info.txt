@@ -1,0 +1,9 @@
+database1 	Greetings
+database2	Make time before people in front of the camera is detected
+database3	Recognize the people in front of the camera
+	database3.1	If there is nobody in front of the camera
+	database3.2	There is someone in front of the camera, but is unknown
+	database3.3	There is one person known in front of the camera
+	database3.4	There is more than one people known in front of the camera
+	database3.5	There is one person unknown in front of the camera
+	database3.6	There is more than one people unknown in front of the camera
