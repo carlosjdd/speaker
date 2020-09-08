@@ -49,9 +49,9 @@ class brain():
         print("[INFO] Ready to receive info")
 
         self.open_data()
-        self.decission_maker([0,0,0],["Hola a todos","Carlos","Luis"])
         self.decission_maker([1,0,0],["Hola a todos","Carlos","Luis"])
-        self.decission_maker([1,1,0],["Hola a todos","Carlos","Luis"])
+        self.decission_maker([1,0,0],["Hola a todos","Carlos","Luis"])
+        self.decission_maker([2,0,0],["Hola a todos","Carlos","Luis"])
 
     def open_data(self):
 
@@ -106,7 +106,7 @@ class brain():
             self.tts_msg.data_string = text[0]
         elif type[0] == 1 or type[0] == 2:
             if type[1] <= 0 or type[1] > len(self.phrases[type[0]-1]):
-                self.tts_msg.data_string = self.phrases[type[0]-1][random.randint(0,len(self.phrases[type[0]-1]))]
+                self.tts_msg.data_string = self.phrases[type[0]-1][random.randint(0,len(self.phrases[type[0]-1])-1)]
             else:
                 self.tts_msg.data_string = self.phrases[type[0]-1][type[1]-1]
 
