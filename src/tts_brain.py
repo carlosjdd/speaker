@@ -59,6 +59,7 @@ class brain():
                 self.phrases[0].append(row[0])					            # Save the path of every SVG file into the array
 
         print(self.phrases)
+        print(len(self.phrases[0]))
 
     def decission_maker(self, type, text):
         if type[0] == 0:
