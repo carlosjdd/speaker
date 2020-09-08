@@ -33,6 +33,8 @@ class brain():
         self.tts_msg = String_Int()
         self.tts_msg.data_int = 0
         self.tts_msg.data_string = ' '
+        self.tts_pub.publish(self.tts_msg)
+#        self.info_pub.publish(self.peoples_info)
 
         #Set phrases Paths
         rospack = rospkg.RosPack()
@@ -163,6 +165,7 @@ class brain():
 
         print (self.tts_msg.data_string)
         self.tts_pub.publish(self.tts_msg)
+#        self.info_pub.publish(self.peoples_info)
 
 
     def run_loop(self):
