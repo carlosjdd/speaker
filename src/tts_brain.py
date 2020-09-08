@@ -49,9 +49,23 @@ class brain():
         print("[INFO] Ready to receive info")
 
         self.open_data()
-        self.decission_maker([1,0,0],["Hola a todos","Carlos","Luis"])
-        self.decission_maker([1,0,0],["Hola a todos","Carlos","Luis"])
-        self.decission_maker([2,0,0],["Hola a todos","Carlos","Luis"])
+
+        self.decission_maker([0,1,0],["Hello World"])
+        self.decission_maker([1,1,0],["Hello World"])
+        self.decission_maker([2,1,0],["Hello World"])
+        self.decission_maker([3,1,0],[])
+        self.decission_maker([3,1,2],[""])
+        self.decission_maker([3,1,1],["Carlos"])
+        self.decission_maker([3,1,0],["Carlos","Javier"])
+
+        self.decission_maker([0,0,0],["Hello World"])
+        self.decission_maker([1,0,0],["Hello World"])
+        self.decission_maker([2,0,0],["Hello World"])
+        self.decission_maker([3,0,0],[])
+        self.decission_maker([3,0,2],[""])
+        self.decission_maker([3,0,1],["Carlos"])
+        self.decission_maker([3,0,0],["Carlos","Javier"])
+
 
     def open_data(self):
 
@@ -98,17 +112,54 @@ class brain():
                 self.phrases[7].append(row[0])					            # Save the path of every SVG file into the array
                 self.phrases[8].append(row[1])
 
-        print(self.phrases)
-        print(len(self.phrases[0]))
-
     def decission_maker(self, type, text):
+
         if type[0] == 0:
             self.tts_msg.data_string = text[0]
+
         elif type[0] == 1 or type[0] == 2:
             if type[1] <= 0 or type[1] > len(self.phrases[type[0]-1]):
                 self.tts_msg.data_string = self.phrases[type[0]-1][random.randint(0,len(self.phrases[type[0]-1])-1)]
             else:
                 self.tts_msg.data_string = self.phrases[type[0]-1][type[1]-1]
+
+        elif type[0] == 3:
+            if text[0] == '' and type[2] <= 0:
+                if type[1] <= 0 or type[1] > len(self.phrases[type[0]-1]):
+                    self.tts_msg.data_string = self.phrases[type[0]-1][random.randint(0,len(self.phrases[type[0]-1])-1)]
+                else:
+                    self.tts_msg.data_string = self.phrases[type[0]-1][type[1]-1]
+            elif text[0] != '':
+                if len(text) == 1:
+                    if type[1] <= 0 or type[1] > len(self.phrases[type[0]+1]):
+                        self.tts_msg.data_string = self.phrases[type[0]+1][random.randint(0,len(self.phrases[type[0]+1])-1)] + text[0]
+                    else:
+                        self.tts_msg.data_string = self.phrases[type[0]+1][type[1]-1] + text[0]
+                else:
+                    if type[1] <= 0 or type[1] > len(self.phrases[type[0]+2]):
+                        self.tts_msg.data_string = self.phrases[type[0]+2][random.randint(0,len(self.phrases[type[0]+2])-1)]
+                    else:
+                        self.tts_msg.data_string = self.phrases[type[0]+2][type[1]-1]
+                    for i in text:
+                        self.tts_msg.data_string = self.tts_msg.data_string + i + ', '
+            else:
+                if type[1] <= 0 or type[1] > len(self.phrases[type[0]]):
+                    self.tts_msg.data_string = self.phrases[type[0]][random.randint(0,len(self.phrases[type[0]])-1)]
+                else:
+                    self.tts_msg.data_string = self.phrases[type[0]][type[1]-1]
+
+            if type[2] == 1:
+                if type[1] <= 0 or type[1] > len(self.phrases[type[0+3]]):
+                    self.tts_msg.data_string = self.tts_msg.data_string + self.phrases[type[0+3]][random.randint(0,len(self.phrases[type[0+3]])-1)]
+                else:
+                    self.tts_msg.data_string = self.tts_msg.data_string + self.phrases[type[0+3]][type[1]-1]
+            elif type[2] > 1:
+                if type[1] <= 0 or type[1] > len(self.phrases[type[0+4]]):
+                    self.tts_msg.data_string = self.tts_msg.data_string + self.phrases[type[0+4]][random.randint(0,len(self.phrases[type[0+4]])-1)]
+                else:
+                    self.tts_msg.data_string = self.tts_msg.data_string + self.phrases[type[0+4]][type[1]-1]
+
+
 
         print (self.tts_msg.data_string)
 
