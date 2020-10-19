@@ -51,7 +51,7 @@ class speaker_class():
         It does nothing but wait until msgs are received.
         """
         while not rospy.is_shutdown():
-            pass
+            rospy.spin()
 
     def stoping_node(self):
         """ROS closing node
