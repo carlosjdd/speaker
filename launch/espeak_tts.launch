@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+
+<launch>
+	<node pkg="speaker" name="brain" type="tts_brain.py"/>
+	<node pkg="speaker" name="tts" type="speaker.py"/>
+</launch>
