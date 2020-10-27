@@ -45,6 +45,8 @@ class brain():
         self.path_many_known = rospack.get_path(pkg_name) + "/data/database6_many_known.csv"
         self.path_one_unknown = rospack.get_path(pkg_name) + "/data/database7_one_unknown.csv"
         self.path_many_unknown = rospack.get_path(pkg_name) + "/data/database8_many_unknown.csv"
+        self.path_insult = rospack.get_path(pkg_name) + "/data/database9_insult_people.csv"
+        self.path_blame = rospack.get_path(pkg_name) + "/data/database10_blame.csv"
 
         print("[INFO] Ready to receive info")
 
@@ -53,7 +55,7 @@ class brain():
 
     def open_data(self):
 
-        self.phrases = [[],[],[],[],[],[],[],[],[]]     #Start the list with 9 arrays, as much as databases needed
+        self.phrases = [[],[],[],[],[],[],[],[],[],[],[]]     #Start the list with 9 arrays, as much as databases needed
 
         with open(self.path_greetings) as csvfile:
             csv_reader = csv.reader(csvfile, delimiter=";")	            # Read the csv file
@@ -95,6 +97,16 @@ class brain():
             for row in csv_reader:								        # Go through every row in the csv file
                 self.phrases[7].append(row[0])					            # Save the path of every SVG file into the array
                 self.phrases[8].append(row[1])
+
+        with open(self.path_insult) as csvfile:
+            csv_reader = csv.reader(csvfile, delimiter=";")	            # Read the csv file
+            for row in csv_reader:								        # Go through every row in the csv file
+                self.phrases[9].append(row[0])					            # Save the path of every SVG file into the array
+
+        with open(self.path_blame) as csvfile:
+            csv_reader = csv.reader(csvfile, delimiter=";")	            # Read the csv file
+            for row in csv_reader:								        # Go through every row in the csv file
+                self.phrases[10].append(row[0])					            # Save the path of every SVG file into the array
 
     def decission_maker(self, type, text):
 
@@ -146,6 +158,18 @@ class brain():
                     self.tts_msg.data_string = self.tts_msg.data_string + self.phrases[type[0]+4][num_random] + str(type[2]) + self.phrases[type[0]+5][num_random]
                 else:                                                                                                                                               #Otherwise, it is said the phrase indicated in the type[1]
                     self.tts_msg.data_string = self.tts_msg.data_string + self.phrases[type[0]+4][type[1]-1] + str(type[2]) + self.phrases[type[0]+5][type[1]-1]
+
+        elif type[0] == 4:
+            if type[1] <= 0 or type[1] > len(self.phrases[type[0]-1]):                                                                                          # If the type[1] is 0, or a wrong number, a random phrase is said.
+                self.tts_msg.data_string = text[0] + " " + self.phrases[type[0]+5][random.randint(0,len(self.phrases[type[0]+5])-1)]
+            else:                                                                                                                                               #Otherwise, it is said the phrase indicated in the type[1]
+                self.tts_msg.data_string = text[0] + " " + self.phrases[type[0]+5][type[1]-1]
+
+        elif type[0] == 5:
+            if type[1] <= 0 or type[1] > len(self.phrases[type[0]-1]):                                                                                          # If the type[1] is 0, or a wrong number, a random phrase is said.
+                self.tts_msg.data_string = self.phrases[type[0]+5][random.randint(0,len(self.phrases[type[0]+5])-1)]
+            else:                                                                                                                                               #Otherwise, it is said the phrase indicated in the type[1]
+                self.tts_msg.data_string = self.phrases[type[0]+5][type[1]-1]
 
 
         print (self.tts_msg.data_string)
