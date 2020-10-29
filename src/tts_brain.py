@@ -47,6 +47,11 @@ class brain():
         self.path_many_unknown = rospack.get_path(pkg_name) + "/data/database8_many_unknown.csv"
         self.path_insult = rospack.get_path(pkg_name) + "/data/database9_insult_people.csv"
         self.path_blame = rospack.get_path(pkg_name) + "/data/database10_blame.csv"
+        self.path_fr_hi = rospack.get_path(pkg_name) + "/data/database11_fragance_hello.csv"
+        self.path_fr_look = rospack.get_path(pkg_name) + "/data/database12_fragance_look.csv"
+        self.path_fr_yes = rospack.get_path(pkg_name) + "/data/database13_fragance_yes.csv"
+        self.path_fr_no = rospack.get_path(pkg_name) + "/data/database14_fragance_no.csv"
+
 
         print("[INFO] Ready to receive info")
 
@@ -55,7 +60,7 @@ class brain():
 
     def open_data(self):
 
-        self.phrases = [[],[],[],[],[],[],[],[],[],[],[]]     #Start the list with 9 arrays, as much as databases needed
+        self.phrases = [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]     #Start the list with as much arrays as databases needed
 
         with open(self.path_greetings) as csvfile:
             csv_reader = csv.reader(csvfile, delimiter=";")	            # Read the csv file
@@ -107,6 +112,28 @@ class brain():
             csv_reader = csv.reader(csvfile, delimiter=";")	            # Read the csv file
             for row in csv_reader:								        # Go through every row in the csv file
                 self.phrases[10].append(row[0])					            # Save the path of every SVG file into the array
+
+        with open(self.path_fr_hi) as csvfile:
+            csv_reader = csv.reader(csvfile, delimiter=";")
+            for row in csv_reader:
+                self.phrases[11].append(row[0])
+
+        with open(self.path_fr_look) as csvfile:
+            csv_reader = csv.reader(csvfile, delimiter=";")
+            for row in csv_reader:
+                self.phrases[12].append(row[0])
+
+        with open(self.path_fr_yes) as csvfile:
+            csv_reader = csv.reader(csvfile, delimiter=";")
+            for row in csv_reader:
+                self.phrases[13].append(row[0])
+
+        with open(self.path_fr_no) as csvfile:
+            csv_reader = csv.reader(csvfile, delimiter=";")
+            for row in csv_reader:
+                self.phrases[14].append(row[0])
+
+
 
     def decission_maker(self, type, text):
 
@@ -168,7 +195,7 @@ class brain():
             else:                                                                                                                                               #Otherwise, it is said the phrase indicated in the type[1]
                 self.tts_msg.data_string = full_text + " " + self.phrases[type[0]+5][type[1]-1]
 
-        elif type[0] == 5:
+        elif type[0] >= 5 and type[0] <= 9:
             if type[1] <= 0 or type[1] > len(self.phrases[type[0]-1]):                                                                                          # If the type[1] is 0, or a wrong number, a random phrase is said.
                 self.tts_msg.data_string = self.phrases[type[0]+5][random.randint(0,len(self.phrases[type[0]+5])-1)]
             else:                                                                                                                                               #Otherwise, it is said the phrase indicated in the type[1]
