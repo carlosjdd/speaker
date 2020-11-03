@@ -40,7 +40,7 @@ class speaker_class():
         - Set speed (default 175) --> Try 260
         - Emphasize capitals
         """
-        self.language = 'es'
+        self.language = 'es-es'
 
     def speaking(self):
         voice = gTTS(self.texto_tts,lang=self.language)
