@@ -4,7 +4,7 @@
 import rospy
 import os
 from gtts import gTTS
-from playsound import playsound
+import pygame
 
 from custom_msgs.msg import String_Int
 
@@ -45,7 +45,11 @@ class speaker_class():
     def speaking(self):
         voice = gTTS(self.texto_tts,lang=self.language)
         voice.save("reproducir.mp3")
-        playsound("reproducir.mp3")
+        pygame.mixer.init()
+        pygame.mixer.music.load("reproducir.mp3")
+        pygame.mixer.music.play()
+        while pygame.mixer.music.get_busy() == True:
+            continue
 
     def run_loop(self):
         """ Infinite loop.
