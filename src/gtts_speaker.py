@@ -50,9 +50,6 @@ class speaker_class():
         print("reproducir")
         pygame.mixer.music.play()
         print("reproducido")
-        time.sleep(10)
-        #while pygame.mixer.music.get_busy() == True:
-        #    continue
 
     def run_loop(self):
         """ Infinite loop.
