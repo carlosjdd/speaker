@@ -47,9 +47,7 @@ class speaker_class():
         voice.save("reproducir.mp3")
         pygame.mixer.init()
         pygame.mixer.music.load("reproducir.mp3")
-        print("reproducir")
         pygame.mixer.music.play()
-        print("reproducido")
 
     def run_loop(self):
         """ Infinite loop.
