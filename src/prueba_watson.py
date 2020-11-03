@@ -1,4 +1,4 @@
 from tts_watson.TtsWatson import TtsWatson
 
-TtsWatson = TtsWatson("BjHfv8ct-Rypjy23mYp8q1pF74kHBEEwa0JBkP4tR2ne")
+TtsWatson = TtsWatson("carlycharly@hotmail.com","3pj58q.L", "en-US_AllisonVoice")
 TtsWatson.play("Hello World")
