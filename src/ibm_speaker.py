@@ -1,4 +1,4 @@
-#!/usr/bin/python2
+#!/usr/bin/python3
 
 # import the necessary packages
 import rospy
