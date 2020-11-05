@@ -45,7 +45,7 @@ class brain():
         self.path_many_known = rospack.get_path(pkg_name) + "/data/database6_many_known.csv"
         self.path_one_unknown = rospack.get_path(pkg_name) + "/data/database7_one_unknown.csv"
         self.path_many_unknown = rospack.get_path(pkg_name) + "/data/database8_many_unknown.csv"
-        self.path_insult = rospack.get_path(pkg_name) + "/data/database9_insult_people.csv"
+        self.path_name = rospack.get_path(pkg_name) + "/data/database9_name.csv"
         self.path_blame = rospack.get_path(pkg_name) + "/data/database10_blame.csv"
         self.path_fr_hi = rospack.get_path(pkg_name) + "/data/database11_fragance_hello.csv"
         self.path_fr_look = rospack.get_path(pkg_name) + "/data/database12_fragance_look.csv"
@@ -54,6 +54,7 @@ class brain():
         self.path_fr_also = rospack.get_path(pkg_name) + "/data/database15_fragance_also.csv"
         self.path_alexa = rospack.get_path(pkg_name) + "/data/database16_alexa.csv"
         self.path_good_people = rospack.get_path(pkg_name) + "/data/database17_good_people.csv"
+        self.path_qbo_hi = rospack.get_path(pkg_name) + "/data/database18_qbo_hello.csv"
 
 
         print("[INFO] Ready to receive info")
@@ -63,7 +64,7 @@ class brain():
 
     def open_data(self):
 
-        self.phrases = [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]     #Start the list with as much arrays as databases needed
+        self.phrases = [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]     #Start the list with as much arrays as databases needed
 
         with open(self.path_greetings) as csvfile:
             csv_reader = csv.reader(csvfile, delimiter=";")	            # Read the csv file
@@ -78,7 +79,7 @@ class brain():
         with open(self.path_noone) as csvfile:
             csv_reader = csv.reader(csvfile, delimiter=";")	            # Read the csv file
             for row in csv_reader:								        # Go through every row in the csv file
-                self.phrases[2].append(row[0])					            # Save the path of every SVG file into the array
+                self.phrases[2].append(row[0])					            # Save ]the path of every SVG file into the array
 
         with open(self.path_only_unknown) as csvfile:
             csv_reader = csv.reader(csvfile, delimiter=";")	            # Read the csv file
@@ -106,51 +107,57 @@ class brain():
                 self.phrases[7].append(row[0])					            # Save the path of every SVG file into the array
                 self.phrases[8].append(row[1])
 
-        with open(self.path_insult) as csvfile:
+        with open(self.path_name) as csvfile:
             csv_reader = csv.reader(csvfile, delimiter=";")	            # Read the csv file
             for row in csv_reader:								        # Go through every row in the csv file
                 self.phrases[9].append(row[0])					            # Save the path of every SVG file into the array
+                self.phrases[10].append(row[1])
 
         with open(self.path_blame) as csvfile:
             csv_reader = csv.reader(csvfile, delimiter=";")	            # Read the csv file
             for row in csv_reader:								        # Go through every row in the csv file
-                self.phrases[10].append(row[0])					            # Save the path of every SVG file into the array
+                self.phrases[11].append(row[0])					            # Save the path of every SVG file into the array
 
         with open(self.path_fr_hi) as csvfile:
             csv_reader = csv.reader(csvfile, delimiter=";")
             for row in csv_reader:
-                self.phrases[11].append(row[0])
+                self.phrases[12].append(row[0])
 
         with open(self.path_fr_look) as csvfile:
             csv_reader = csv.reader(csvfile, delimiter=";")
             for row in csv_reader:
-                self.phrases[12].append(row[0])
+                self.phrases[13].append(row[0])
 
         with open(self.path_fr_no) as csvfile:
             csv_reader = csv.reader(csvfile, delimiter=";")
             for row in csv_reader:
-                self.phrases[13].append(row[0])
+                self.phrases[14].append(row[0])
 
         with open(self.path_fr_yes) as csvfile:
             csv_reader = csv.reader(csvfile, delimiter=";")
             for row in csv_reader:
-                self.phrases[14].append(row[0])
+                self.phrases[15].append(row[0])
 
         with open(self.path_fr_also) as csvfile:
             csv_reader = csv.reader(csvfile, delimiter=";")
             for row in csv_reader:
-                self.phrases[15].append(row[0])
+                self.phrases[16].append(row[0])
 
         with open(self.path_alexa) as csvfile:
             csv_reader = csv.reader(csvfile, delimiter=";")	            # Read the csv file
             for row in csv_reader:								        # Go through every row in the csv file
-                self.phrases[16].append(row[0])					            # Save the path of every SVG file into the array
+                self.phrases[17].append(row[0])					            # Save the path of every SVG file into the array
 
         with open(self.path_good_people) as csvfile:
             csv_reader = csv.reader(csvfile, delimiter=";")	            # Read the csv file
             for row in csv_reader:								        # Go through every row in the csv file
-                self.phrases[17].append(row[0])					            # Save the path of every SVG file into the array
-                self.phrases[18].append(row[1])
+                self.phrases[18].append(row[0])					            # Save the path of every SVG file into the array
+                self.phrases[19].append(row[1])
+
+        with open(self.path_qbo_hi) as csvfile:
+            csv_reader = csv.reader(csvfile, delimiter=";")	            # Read the csv file
+            for row in csv_reader:								        # Go through every row in the csv file
+                self.phrases[20].append(row[0])					            # Save the path of every SVG file into the array
 
     def decission_maker(self, type, text):
 
@@ -204,45 +211,52 @@ class brain():
                     self.tts_msg.data_string = self.tts_msg.data_string + self.phrases[type[0]+4][type[1]-1] + str(type[2]) + self.phrases[type[0]+5][type[1]-1]
 
         elif type[0] == 4:
+            random_value = random.randint(0,len(self.phrases[type[0]+5])-1)
             full_text = ""
             for i in text:
                 full_text += i
-            if type[1] <= 0 or type[1] > len(self.phrases[type[0]-1]):                                                                                          # If the type[1] is 0, or a wrong number, a random phrase is said.
-                self.tts_msg.data_string = full_text + " " + self.phrases[type[0]+5][random.randint(0,len(self.phrases[type[0]+5])-1)]
+            if type[1] <= 0 or type[1] > len(self.phrases[type[0]+5]):                                                                                          # If the type[1] is 0, or a wrong number, a random phrase is said.
+                self.tts_msg.data_string = self.phrases[type[0]+5][random_value] + full_text + " " + self.phrases[type[0]+6][random_value]
             else:                                                                                                                                               #Otherwise, it is said the phrase indicated in the type[1]
-                self.tts_msg.data_string = full_text + " " + self.phrases[type[0]+5][type[1]-1]
+                self.tts_msg.data_string = self.phrases[type[0]+5][type[1]-1]+ full_text + " " + self.phrases[type[0]+6][type[1]-1]
 
         elif type[0] >= 5 and type[0] <= 8:
-            if type[1] <= 0 or type[1] > len(self.phrases[type[0]-1]):                                                                                          # If the type[1] is 0, or a wrong number, a random phrase is said.
-                self.tts_msg.data_string = self.phrases[type[0]+5][random.randint(0,len(self.phrases[type[0]+5])-1)]
+            if type[1] <= 0 or type[1] > len(self.phrases[type[0]+6]):                                                                                          # If the type[1] is 0, or a wrong number, a random phrase is said.
+                self.tts_msg.data_string = self.phrases[type[0]+6][random.randint(0,len(self.phrases[type[0]+6])-1)]
             else:                                                                                                                                               #Otherwise, it is said the phrase indicated in the type[1]
-                self.tts_msg.data_string = self.phrases[type[0]+5][type[1]-1]
+                self.tts_msg.data_string = self.phrases[type[0]+6][type[1]-1]
 
         elif type[0] == 9 or type[0] == 10:
-            if type[1] <= 0 or type[1] > len(self.phrases[type[0]-1]):                                                                                          # If the type[1] is 0, or a wrong number, a random phrase is said.
-                self.tts_msg.data_string = self.phrases[type[0]+5][random.randint(0,len(self.phrases[type[0]+5])-1)] + str(type[2])
+            if type[1] <= 0 or type[1] > len(self.phrases[type[0]+6]):                                                                                          # If the type[1] is 0, or a wrong number, a random phrase is said.
+                self.tts_msg.data_string = self.phrases[type[0]+6][random.randint(0,len(self.phrases[type[0]+6])-1)] + str(type[2])
             else:                                                                                                                                               #Otherwise, it is said the phrase indicated in the type[1]
-                self.tts_msg.data_string = self.phrases[type[0]+5][type[1]-1] + str(type [2])
+                self.tts_msg.data_string = self.phrases[type[0]+6][type[1]-1] + str(type [2])
 
         elif type[0] == 11:
-            if type[1] <= 0 or type[1] > len(self.phrases[type[0]-1]):                                                                                          # If the type[1] is 0, or a wrong number, a random phrase is said.
-                self.tts_msg.data_string = self.phrases[type[0]+5][0]
+            if type[1] <= 0 or type[1] > len(self.phrases[type[0]+6]):                                                                                          # If the type[1] is 0, or a wrong number, a random phrase is said.
+                self.tts_msg.data_string = self.phrases[type[0]+6][0]
                 self.tts_pub.publish(self.tts_msg)
-                self.tts_msg.data_string = self.phrases[type[0]+5][random.randint(1,len(self.phrases[type[0]+5])-1)]
+                self.tts_msg.data_string = self.phrases[type[0]+6][random.randint(1,len(self.phrases[type[0]+6])-1)]
             else:                                                                                                                                               #Otherwise, it is said the phrase indicated in the type[1]
-                self.tts_msg.data_string = self.phrases[type[0]+5][0]
+                self.tts_msg.data_string = self.phrases[type[0]+6][0]
                 self.tts_pub.publish(self.tts_msg)
-                self.tts_msg.data_string = self.phrases[type[0]+5][type[1]-1]
+                self.tts_msg.data_string = self.phrases[type[0]+6][type[1]-1]
 
         elif type[0] == 12:
             full_text = ""
             for i in text:
                 full_text += i
-            if type[1] <= 0 or type[1] > len(self.phrases[type[0]-1]):
-                random_value = random.randint(0,len(self.phrases[type[0]+5])-1)                                                                                          # If the type[1] is 0, or a wrong number, a random phrase is said.
-                self.tts_msg.data_string = self.phrases[type[0]+5][random_value] + " " + full_text + ", " + self.phrases[type[0]+6][random_value]
+            if type[1] <= 0 or type[1] > len(self.phrases[type[0]+6]):
+                random_value = random.randint(0,len(self.phrases[type[0]+6])-1)                                                                                          # If the type[1] is 0, or a wrong number, a random phrase is said.
+                self.tts_msg.data_string = self.phrases[type[0]+6][random_value] + " " + full_text + ", " + self.phrases[type[0]+7][random_value]
             else:                                                                                                                                               #Otherwise, it is said the phrase indicated in the type[1]
-                self.tts_msg.data_string = self.phrases[type[0]+5][type[1]-1] + " " + full_text + ", " + self.phrases[type[0]+6][type[1]-1]
+                self.tts_msg.data_string = self.phrases[type[0]+6][type[1]-1] + " " + full_text + ", " + self.phrases[type[0]+7][type[1]-1]
+
+        elif type[0] == 13:
+            if type[1] <= 0 or type[1] > len(self.phrases[type[0]+7]):                                                                                          # If the type[1] is 0, or a wrong number, a random phrase is said.
+                self.tts_msg.data_string = self.phrases[type[0]+7][random.randint(0,len(self.phrases[type[0]+7])-1)]
+            else:                                                                                                                                               #Otherwise, it is said the phrase indicated in the type[1]
+                self.tts_msg.data_string = self.phrases[type[0]+7][type[1]-1]
 
         print (self.tts_msg.data_string)
         self.tts_pub.publish(self.tts_msg)
