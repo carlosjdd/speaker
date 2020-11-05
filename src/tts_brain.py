@@ -53,8 +53,8 @@ class brain():
         self.path_fr_yes = rospack.get_path(pkg_name) + "/data/database14_fragance_yes.csv"
         self.path_fr_also = rospack.get_path(pkg_name) + "/data/database15_fragance_also.csv"
         self.path_alexa = rospack.get_path(pkg_name) + "/data/database16_alexa.csv"
-        self.path_good_people = rospack.get_path(pkg_name) + "/data/database17_good_people.csv"
-        self.path_qbo_hi = rospack.get_path(pkg_name) + "/data/database18_qbo_hello.csv"
+        self.path_qbo_hi = rospack.get_path(pkg_name) + "/data/database17_qbo_hi.csv"
+        self.path_qbo_presentation = rospack.get_path(pkg_name) + "/data/database18_qbo_presentation.csv"
 
 
         print("[INFO] Ready to receive info")
@@ -64,7 +64,7 @@ class brain():
 
     def open_data(self):
 
-        self.phrases = [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]     #Start the list with as much arrays as databases needed
+        self.phrases = [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]     #Start the list with as much arrays as databases needed
 
         with open(self.path_greetings) as csvfile:
             csv_reader = csv.reader(csvfile, delimiter=";")	            # Read the csv file
@@ -148,16 +148,15 @@ class brain():
             for row in csv_reader:								        # Go through every row in the csv file
                 self.phrases[17].append(row[0])					            # Save the path of every SVG file into the array
 
-        with open(self.path_good_people) as csvfile:
-            csv_reader = csv.reader(csvfile, delimiter=";")	            # Read the csv file
-            for row in csv_reader:								        # Go through every row in the csv file
-                self.phrases[18].append(row[0])					            # Save the path of every SVG file into the array
-                self.phrases[19].append(row[1])
-
         with open(self.path_qbo_hi) as csvfile:
             csv_reader = csv.reader(csvfile, delimiter=";")	            # Read the csv file
             for row in csv_reader:								        # Go through every row in the csv file
-                self.phrases[20].append(row[0])					            # Save the path of every SVG file into the array
+                self.phrases[18].append(row[0])					            # Save the path of every SVG file into the array
+
+        with open(self.path_qbo_presentation) as csvfile:
+            csv_reader = csv.reader(csvfile, delimiter=";")	            # Read the csv file
+            for row in csv_reader:								        # Go through every row in the csv file
+                self.phrases[19].append(row[0])					            # Save the path of every SVG file into the array
 
     def decission_maker(self, type, text):
 
@@ -242,21 +241,11 @@ class brain():
                 self.tts_pub.publish(self.tts_msg)
                 self.tts_msg.data_string = self.phrases[type[0]+6][type[1]-1]
 
-        elif type[0] == 12:
-            full_text = ""
-            for i in text:
-                full_text += i
-            if type[1] <= 0 or type[1] > len(self.phrases[type[0]+6]):
-                random_value = random.randint(0,len(self.phrases[type[0]+6])-1)                                                                                          # If the type[1] is 0, or a wrong number, a random phrase is said.
-                self.tts_msg.data_string = self.phrases[type[0]+6][random_value] + " " + full_text + ", " + self.phrases[type[0]+7][random_value]
+        elif type[0] == 12 or type[0] == 13:
+            if type[1] <= 0 or type[1] > len(self.phrases[type[0]+6]):                                                                                          # If the type[1] is 0, or a wrong number, a random phrase is said.
+                self.tts_msg.data_string = self.phrases[type[0]+6][random.randint(0,len(self.phrases[type[0]+6])-1)]
             else:                                                                                                                                               #Otherwise, it is said the phrase indicated in the type[1]
-                self.tts_msg.data_string = self.phrases[type[0]+6][type[1]-1] + " " + full_text + ", " + self.phrases[type[0]+7][type[1]-1]
-
-        elif type[0] == 13:
-            if type[1] <= 0 or type[1] > len(self.phrases[type[0]+7]):                                                                                          # If the type[1] is 0, or a wrong number, a random phrase is said.
-                self.tts_msg.data_string = self.phrases[type[0]+7][random.randint(0,len(self.phrases[type[0]+7])-1)]
-            else:                                                                                                                                               #Otherwise, it is said the phrase indicated in the type[1]
-                self.tts_msg.data_string = self.phrases[type[0]+7][type[1]-1]
+                self.tts_msg.data_string = self.phrases[type[0]+6][type[1]-1]
 
         print (self.tts_msg.data_string)
         self.tts_pub.publish(self.tts_msg)
