@@ -56,6 +56,9 @@ class brain():
         self.path_qbo_hi = rospack.get_path(pkg_name) + "/data/database17_qbo_hi.csv"
         self.path_qbo_presentation = rospack.get_path(pkg_name) + "/data/database18_qbo_presentation.csv"
         self.path_qbo_answer = rospack.get_path(pkg_name) + "/data/database19_qbo_answer.csv"
+        self.path_frases_celebres = rospack.get_path(pkg_name) + "/data/database20_frases_celebres.csv"
+        self.path_frases_absurdas = rospack.get_path(pkg_name) + "/data/database21_frases_absurdas.csv"
+        self.path_police = rospack.get_path(pkg_name) + "/data/database22_policia.csv"
 
 
         print("[INFO] Ready to receive info")
@@ -65,7 +68,7 @@ class brain():
 
     def open_data(self):
 
-        self.phrases = [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]     #Start the list with as much arrays as databases needed
+        self.phrases = [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]     #Start the list with as much arrays as databases needed
 
         with open(self.path_greetings) as csvfile:
             csv_reader = csv.reader(csvfile, delimiter=";")	            # Read the csv file
@@ -163,6 +166,22 @@ class brain():
             csv_reader = csv.reader(csvfile, delimiter=";")	            # Read the csv file
             for row in csv_reader:								        # Go through every row in the csv file
                 self.phrases[20].append(row[0])					            # Save the path of every SVG file into the array
+
+        with open(self.path_qbo_answer) as csvfile:
+            csv_reader = csv.reader(csvfile, delimiter=";")	            # Read the csv file
+            for row in csv_reader:								        # Go through every row in the csv file
+                self.phrases[21].append(row[0])					            # Save the path of every SVG file into the array
+
+        with open(self.path_qbo_answer) as csvfile:
+            csv_reader = csv.reader(csvfile, delimiter=";")	            # Read the csv file
+            for row in csv_reader:								        # Go through every row in the csv file
+                self.phrases[22].append(row[0])					            # Save the path of every SVG file into the array
+
+        with open(self.path_qbo_answer) as csvfile:
+            csv_reader = csv.reader(csvfile, delimiter=";")	            # Read the csv file
+            for row in csv_reader:								        # Go through every row in the csv file
+                self.phrases[23].append(row[0])					            # Save the path of every SVG file into the array
+
 
     def decission_maker(self, type, text):
 
@@ -268,6 +287,12 @@ class brain():
 
             self.tts_pub.publish(self.tts_msg)
             self.tts_msg.data_string = full_text
+
+        elif type[0] >= 16 and type[0] <= 18:
+            if type[1] <= 0 or type[1] > len(self.phrases[type[0]+5]):                                                                                          # If the type[1] is 0, or a wrong number, a random phrase is said.
+                self.tts_msg.data_string = self.phrases[type[0]+5][random.randint(0,len(self.phrases[type[0]+5])-1)]
+            else:                                                                                                                                               #Otherwise, it is said the phrase indicated in the type[1]
+                self.tts_msg.data_string = self.phrases[type[0]+5][type[1]-1]
 
         print (self.tts_msg.data_string)
         self.tts_pub.publish(self.tts_msg)
