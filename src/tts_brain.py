@@ -167,17 +167,17 @@ class brain():
             for row in csv_reader:								        # Go through every row in the csv file
                 self.phrases[20].append(row[0])					            # Save the path of every SVG file into the array
 
-        with open(self.path_qbo_answer) as csvfile:
+        with open(self.path_frases_celebres) as csvfile:
             csv_reader = csv.reader(csvfile, delimiter=";")	            # Read the csv file
             for row in csv_reader:								        # Go through every row in the csv file
                 self.phrases[21].append(row[0])					            # Save the path of every SVG file into the array
 
-        with open(self.path_qbo_answer) as csvfile:
+        with open(self.path_frases_absurdas) as csvfile:
             csv_reader = csv.reader(csvfile, delimiter=";")	            # Read the csv file
             for row in csv_reader:								        # Go through every row in the csv file
                 self.phrases[22].append(row[0])					            # Save the path of every SVG file into the array
 
-        with open(self.path_qbo_answer) as csvfile:
+        with open(self.path_police) as csvfile:
             csv_reader = csv.reader(csvfile, delimiter=";")	            # Read the csv file
             for row in csv_reader:								        # Go through every row in the csv file
                 self.phrases[23].append(row[0])					            # Save the path of every SVG file into the array
