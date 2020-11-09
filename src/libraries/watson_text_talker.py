@@ -171,5 +171,4 @@ class TextTalker:
         time.sleep(self.config.INITIALIZATION_DELAY)
 
         pygame.init()
-        pygame.display.set_mode((1, 1))
         pygame.mixer.init()
