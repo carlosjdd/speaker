@@ -100,7 +100,7 @@ class TextTalker:
         percent = 100 - ((importance+self.quiet_level-1)*10)
         rand = randrange(100)
 
-        # print(rand, percent) 
+        # print(rand, percent)
         return rand < percent
 
     # if the speech file exists return it's filepath
@@ -156,7 +156,7 @@ class TextTalker:
         self.text_to_speech.set_service_url(self.config.API_URL)
     # watson tts credentials for username & password
     # OR optionally use TT_Config which should have the credentials assigned, within
-    
+
     def __init__(self, api_key=None, config=None):
 
         if config == None:
@@ -171,5 +171,5 @@ class TextTalker:
         time.sleep(self.config.INITIALIZATION_DELAY)
 
         pygame.init()
+        pygame.display.set_mode((1, 1))
         pygame.mixer.init()
-
