@@ -2,7 +2,7 @@
 
 # import the necessary packages
 import rospy
-from watson_text_talker import *
+from libraries.watson_text_talker import *
 
 from custom_msgs.msg import String_Int
 
