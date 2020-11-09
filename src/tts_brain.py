@@ -59,6 +59,7 @@ class brain():
         self.path_frases_celebres = rospack.get_path(pkg_name) + "/data/database20_frases_celebres.csv"
         self.path_frases_absurdas = rospack.get_path(pkg_name) + "/data/database21_frases_absurdas.csv"
         self.path_police = rospack.get_path(pkg_name) + "/data/database22_policia.csv"
+        self.path_nothing = rospack.get_path(pkg_name) + "/data/database23_nothing_asked.csv"
 
 
         print("[INFO] Ready to receive info")
@@ -182,6 +183,11 @@ class brain():
             for row in csv_reader:								        # Go through every row in the csv file
                 self.phrases[23].append(row[0])					            # Save the path of every SVG file into the array
 
+        with open(self.path_nothing) as csvfile:
+            csv_reader = csv.reader(csvfile, delimiter=";")	            # Read the csv file
+            for row in csv_reader:								        # Go through every row in the csv file
+                self.phrases[24].append(row[0])					            # Save the path of every SVG file into the array
+
 
     def decission_maker(self, type, text):
 
@@ -288,7 +294,7 @@ class brain():
             self.tts_pub.publish(self.tts_msg)
             self.tts_msg.data_string = full_text
 
-        elif type[0] >= 16 and type[0] <= 18:
+        elif type[0] >= 16 and type[0] <= 19:
             if type[1] <= 0 or type[1] > len(self.phrases[type[0]+5]):                                                                                          # If the type[1] is 0, or a wrong number, a random phrase is said.
                 self.tts_msg.data_string = self.phrases[type[0]+5][random.randint(0,len(self.phrases[type[0]+5])-1)]
             else:                                                                                                                                               #Otherwise, it is said the phrase indicated in the type[1]
