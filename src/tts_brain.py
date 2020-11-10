@@ -263,6 +263,7 @@ class brain():
                 self.tts_msg.data_string = self.phrases[type[0]+6][type[1]-1] + str(type [2])
 
         elif type[0] == 11:
+            """
             if type[1] <= 0 or type[1] > len(self.phrases[type[0]+6]):                                                                                          # If the type[1] is 0, or a wrong number, a random phrase is said.
                 self.tts_msg.data_string = self.phrases[type[0]+6][0]
                 self.tts_pub.publish(self.tts_msg)
@@ -270,7 +271,12 @@ class brain():
             else:                                                                                                                                               #Otherwise, it is said the phrase indicated in the type[1]
                 self.tts_msg.data_string = self.phrases[type[0]+6][0]
                 self.tts_pub.publish(self.tts_msg)
-                self.tts_msg.data_string = self.phrases[type[0]+6][type[1]-1]
+                self.tts_msg.data_string = self.phrases[type[0]+6][type[1]-1] """
+
+            if type[1] <= 0 or type[1] > len(self.phrases[type[0]+6]):                                                                                          # If the type[1] is 0, or a wrong number, a random phrase is said.
+                self.tts_msg.data_string = self.phrases[type[0]+6][0] + ", " + self.phrases[type[0]+6][random.randint(1,len(self.phrases[type[0]+6])-1)]
+            else:                                                                                                                                               #Otherwise, it is said the phrase indicated in the type[1]
+                self.tts_msg.data_string = self.phrases[type[0]+6][0] + ", " + self.phrases[type[0]+6][type[1]-1]
 
         elif type[0] == 12 or type[0] == 13:
             if type[1] <= 0 or type[1] > len(self.phrases[type[0]+6]):                                                                                          # If the type[1] is 0, or a wrong number, a random phrase is said.
@@ -289,10 +295,7 @@ class brain():
             for i in text:
                 full_text += i
                                                                                                                                                        #Otherwise, it is said the phrase indicated in the type[1]
-            self.tts_msg.data_string = self.phrases[17][0]
-
-            self.tts_pub.publish(self.tts_msg)
-            self.tts_msg.data_string = full_text
+            self.tts_msg.data_string = self.phrases[17][0] + ", " + full_text
 
         elif type[0] >= 16 and type[0] <= 19:
             if type[1] <= 0 or type[1] > len(self.phrases[type[0]+5]):                                                                                          # If the type[1] is 0, or a wrong number, a random phrase is said.
