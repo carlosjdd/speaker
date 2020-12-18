@@ -72,7 +72,7 @@ class brain():
 
     def open_data(self):
 
-        self.phrases = [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]     #Start the list with as much arrays as databases needed
+        self.phrases = [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]     #Start the list with as much arrays as databases needed
 
         with open(self.path_greetings) as csvfile:
             csv_reader = csv.reader(csvfile, delimiter=";")	            # Read the csv file
