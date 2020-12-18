@@ -210,7 +210,7 @@ class brain():
             csv_reader = csv.reader(csvfile, delimiter=";")	            # Read the csv file
             for row in csv_reader:								        # Go through every row in the csv file
                 self.phrases[28].append(row[0])					            # Save the path of every SVG file into the array
-                self.phrases[]
+                self.phrases[29].append(row[1])
 
 
     def decission_maker(self, type, text):
