@@ -45,9 +45,9 @@ class speaker_class():
     def speaking(self):
         voice = gTTS(self.texto_tts,lang=self.language)
         voice.save("reproducir.mp3")
-        pygame.mixer.init()
-        pygame.mixer.music.load("reproducir.mp3")
-        pygame.mixer.music.play()
+        #pygame.mixer.init()
+        #pygame.mixer.music.load("reproducir.mp3")
+        #pygame.mixer.music.play()
 
     def run_loop(self):
         """ Infinite loop.

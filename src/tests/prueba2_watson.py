@@ -11,7 +11,7 @@ text_to_speech.set_service_url('https://api.eu-gb.text-to-speech.watson.cloud.ib
 with open('hello_world.wav', 'wb') as audio_file:
     audio_file.write(
         text_to_speech.synthesize(
-            'Hola mundo',
+            'Ikki bebe',
             voice='es-ES_LauraVoice',
             accept='audio/wav'
         ).get_result().content)
