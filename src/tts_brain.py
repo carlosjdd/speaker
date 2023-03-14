@@ -1,8 +1,10 @@
-#!/usr/bin/python3
+#!/usr/bin/python2
 
 # import the necessary packages
 import rospy
 import rospkg
+
+import openai
 
 from custom_msgs.msg import String_Int_Arrays
 from custom_msgs.msg import String_Int
@@ -22,6 +24,7 @@ class brain():
         It is the constructor of the class. It does:
         - Subscribe itself to the topics
         """
+        openai.api_key = "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"
 
         #Subscribe to ROS topics
         self.tts_sub = rospy.Subscriber("tts_info", String_Int_Arrays, self.cb_info)
@@ -318,8 +321,13 @@ class brain():
             full_text = ""
             for i in text:
                 full_text += i
-                                                                                                                                                       #Otherwise, it is said the phrase indicated in the type[1]
-            self.tts_msg.data_string = self.phrases[17][0] + ", " + full_text
+            #Uncomment next lines to ask alexa:                                                                                                                                                       #Otherwise, it is said the phrase indicated in the type[1]
+            #self.tts_msg.data_string = self.phrases[17][0] + ", " + full_text
+            
+            #Uncomment next lines to ask ChatGPT
+            full_text = full_text + "en 20 palabras maximo"
+            completion = openai.Completion.create(engine="text-davinci-003", prompt=full_text, max_tokens=2048)
+            self.tts_msg.data_string = completion.choices[0].text
 
         elif type[0] >= 16 and type[0] <= 24:
             if type[1] <= 0 or type[1] > len(self.phrases[type[0]+5]):                                                                                          # If the type[1] is 0, or a wrong number, a random phrase is said.
