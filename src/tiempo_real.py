@@ -46,11 +46,11 @@ class tiempo_real():
         """
         while not rospy.is_shutdown():
             #functions to repeat until the node is closed
-            input = input()
+            terminal_input = input()
             
             # if(input == '1')
 
-            self.tts_msg.data_string = input
+            self.tts_msg.data_string = terminal_input
             self.tts_pub.publish(self.tts_msg)
 
             rospy.spin()
@@ -82,7 +82,7 @@ if __name__=='__main__':
     try:
         rospy.init_node('ROSnode_name')       # Init ROS node
 
-        class_object = class_name()
+        class_object = tiempo_real()
         rospy.on_shutdown(class_object.stopping_node)   #When ROS is closed, this void is executed
 
         class_object.run_loop()
